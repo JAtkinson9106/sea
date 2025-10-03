@@ -4,6 +4,7 @@ from sqlalchemy.orm import DeclarativeBase
 from sqlalchemy import Integer, String
 from sqlalchemy.orm import Mapped, mapped_column
 from flask_admin import Admin
+import sqlite3
 
 class Base(DeclarativeBase):
   pass
@@ -33,6 +34,22 @@ def about():
 @app.route('/assets') 
 def assets():
     return render_template('assets.html', title='Assets')
+@app.route('/data')
+def data():
+    return render_template('data.html', title='Data Page')
+    conn = sqlite3.connect('eb2.db')  # Creates a new database file if it doesn’t exist
+    cursor = conn.cursor()
+    cursor.execute("""CREATE TABLE STUDENT(NAME VARCHAR(255), CLASS VARCHAR(255), SECTION VARCHAR(255))""")
+    # Insert data into the table
+    cursor.execute("INSERT INTO STUDENT VALUES ('Raju', '7th', 'A')")
+    cursor.execute("INSERT INTO STUDENT VALUES ('Shyam', '8th', 'B')")
+    cursor.execute("INSERT INTO STUDENT VALUES ('Baburao', '9th', 'C')"
+    )
+    print("Data Inserted in the table: ")
+    cursor.execute("SELECT * FROM STUDENT")
+    for row in cursor.fetchall():
+        print(row)
+    return "Data inserted and displayed in console"
 
 admin = Admin(app, name='microblog', template_mode='bootstrap3')
 

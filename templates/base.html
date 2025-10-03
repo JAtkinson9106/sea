@@ -1,3 +1,34 @@
+<style>
+    #siteWrapper {
+        width: 80%;
+        height: 100%;
+        margin: 0 auto;
+        font-family: Arial, sans-serif;
+        background-color: rgb(244, 244, 245);
+        color: rgba(0, 0, 0, 0.021);
+ 
+    }
+    nav {
+        background-color: blue;
+        padding: 10px;
+        color: rgb(0, 0, 0);
+    }
+     nav ul li { 
+        display:inline;
+        text-align: center;
+    }
+    nav a {
+        margin: 0 10px;
+        text-decoration: none;
+        color: #070404;
+    }
+    nav a:hover {
+        text-decoration: underline;
+    }
+    h1, p, ul {
+        color: black;
+    }
+</style>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,11 +37,15 @@
     <title>{{ title }}</title>
 </head>
 <body>
-    <nav>
-        <a href="/">Home</a> | 
-        <a href="/about">About</a>
-        <a href="/assets">Assets</a>  
-    </nav>
- {% block content %}{% endblock %}  
+    <div id="siteWrapper">
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/assets">Assets</a></li>  
+            </ul>
+        </nav>
+    {% block content %}{% endblock %}  
+    </div>
 </body>
 </html>
